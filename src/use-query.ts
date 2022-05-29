@@ -1,13 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-import { cacheObject, updateCache } from "./cache-store";
-import { UseQueryOptions } from "./types";
-import { getCacheName } from "./utils";
+import { cacheObject, updateCache } from './cache-store';
+import { UseQueryOptions } from './types';
+import { getCacheName } from './utils';
 
-export const useQuery = <TData = any, TParam = any, TError = any>(
-  options: UseQueryOptions<TData, TParam, TError>,
-) => {
-  const [isLoading, setLoading] = useState<boolean>(options.isLoading || false);
+export const useQuery = <TData = any, TParam = any, TError = any>({
+  enabled = true,
+  ...options
+}: UseQueryOptions<TData, TParam, TError>) => {
+  const [isLoading, setLoading] = useState<boolean>(options.isLoading || true);
   const [isFetching, setFetching] = useState<boolean>(false);
   const [data, setData] = useState<TData | undefined>(options.initData);
   const [error, setError] = useState<TError | undefined>();
@@ -28,12 +29,16 @@ export const useQuery = <TData = any, TParam = any, TError = any>(
   }, [options.param]);
 
   useEffect(() => {
-    if (options.cache && options.cache === "") {
+    if (options.cache && options.cache === '') {
       throw new Error(`cache name can not be empty`);
     }
   }, [options.cache]);
 
   useEffect(() => {
+    if (!enabled) {
+      return;
+    }
+
     const cacheName = getCacheName(options.cache, options.param);
 
     if (options.cache && cacheObject[cacheName]) {
