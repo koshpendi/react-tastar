@@ -1,5 +1,4 @@
 export interface Options<TData, TError> {
-  isLoading?: boolean;
   initData?: TData | undefined;
   cache?: string;
   onSuccess?: (response: TData) => void;
@@ -14,7 +13,7 @@ export declare type IsAny<T, True, False = never> = true | false extends (
 
 export type UseQueryOptions<TData, TParam, TError> = {
   queryFn(): Promise<TData>;
-  enabled: boolean;
+  enabled?: boolean;
 } & Options<TData, TError> &
   (TParam extends IsAny<TParam, any> ? { param?: TParam } : { param: TParam });
 

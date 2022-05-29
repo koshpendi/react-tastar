@@ -8,7 +8,7 @@ export const useQuery = <TData = any, TParam = any, TError = any>({
   enabled = true,
   ...options
 }: UseQueryOptions<TData, TParam, TError>) => {
-  const [isLoading, setLoading] = useState<boolean>(options.isLoading || true);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [isFetching, setFetching] = useState<boolean>(false);
   const [data, setData] = useState<TData | undefined>(options.initData);
   const [error, setError] = useState<TError | undefined>();

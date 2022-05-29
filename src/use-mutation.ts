@@ -15,7 +15,7 @@ interface Result<TData, TBody, TError> {
 export const useMutation = <TData = any, TBody = any, TError = any>(
   options: UseMutationOptions<TData, TBody, TError>,
 ): Result<TData, TBody, TError> => {
-  const [isLoading, setLoading] = useState<boolean>(options.isLoading || false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<TData | undefined>(options.initData);
   const [error, setError] = useState<TError | undefined>();
   const [isError, setIsError] = useState<boolean>(false);
