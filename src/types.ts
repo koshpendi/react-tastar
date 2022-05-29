@@ -24,5 +24,5 @@ export type UseMutationCallback<TData, TBody> = TBody extends IsAny<TBody, any>
 
 export type UseMutationOptions<TData, TBody, TError> = Options<TData, TError> &
   (TBody extends IsAny<TBody, any>
-    ? { queryFn: () => Promise<TData> }
-    : { queryFn: (body: TBody) => Promise<TData> });
+    ? { mutationFn: () => Promise<TData> }
+    : { mutationFn: (body: TBody) => Promise<TData> });
