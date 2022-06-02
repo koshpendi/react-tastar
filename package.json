@@ -1,9 +1,10 @@
 {
-  "name": "nmd-hooks",
+  "name": "react-tastar",
   "version": "0.0.1",
   "description": "",
-  "author": "@kowpendi",
+  "author": "anuarkhanov@gmail.com",
   "license": "MIT",
+  "git": "https://github.com/koshpendi/happy-hooks",
   "main": "dist/index.js",
   "engines": {
     "node": ">=8",
