@@ -16,7 +16,7 @@ export const FetchingDiv: FC<{ isLoading: boolean; spinner?: ReactNode }> = ({
               justifyContent: 'center',
               alignItems: 'center',
               position: 'absolute',
-              background: 'rgb(255 255 255 / 80%)',
+              background: '#ecececc2',
               top: 0,
               left: 0,
               width: '100%',

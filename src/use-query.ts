@@ -9,7 +9,7 @@ export const useQuery = <TData = any, TParam = any, TError = any>({
   ...options
 }: UseQueryOptions<TData, TParam, TError>) => {
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [isFetching, setFetching] = useState<boolean>(false);
+  const [isFetching, setFetching] = useState<boolean>(true);
   const [data, setData] = useState<TData | undefined>(options.initData);
   const [error, setError] = useState<TError | undefined>();
   const [isError, setIsError] = useState<boolean>(false);
@@ -17,6 +17,9 @@ export const useQuery = <TData = any, TParam = any, TError = any>({
   const setResolvedError = (e: TError) => {
     setError(e);
     setIsError(true);
+    if (options.onError) {
+      options.onError(e);
+    }
   };
 
   const refetch = useCallback(() => {
@@ -62,12 +65,7 @@ export const useQuery = <TData = any, TParam = any, TError = any>({
             options.onSuccess(response);
           }
         })
-        .catch((e: TError) => {
-          setResolvedError(e);
-          if (options.onError) {
-            options.onError(e);
-          }
-        })
+        .catch(setResolvedError)
         .finally(() => setLoading(false));
     }
   }, [options.param]);
