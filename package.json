@@ -1,10 +1,10 @@
 {
   "name": "react-tastar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "author": "anuarkhanov@gmail.com",
   "license": "MIT",
-  "repository": "https://github.com/koshpendi/happy-tastar.git",
+  "repository": "https://github.com/koshpendi/react-tastar.git",
   "main": "dist/index.js",
   "engines": {
     "node": ">=8",
