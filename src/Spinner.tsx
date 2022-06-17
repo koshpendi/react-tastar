@@ -1,10 +1,13 @@
 import React, { FC, ReactNode } from 'react';
+import { Spinner } from 'react-bootstrap';
 
-export const FetchingDiv: FC<{ isLoading: boolean; spinner?: ReactNode }> = ({
-  children,
-  spinner,
-  isLoading,
-}) => {
+type Props = {
+  isLoading: boolean;
+  backgroundColor?: string;
+  spinner?: ReactNode;
+};
+
+export const AbsoulteSpinner: FC<Props> = ({ children, spinner, isLoading, backgroundColor }) => {
   return (
     <>
       <div style={{ position: 'relative' }}>
@@ -16,14 +19,14 @@ export const FetchingDiv: FC<{ isLoading: boolean; spinner?: ReactNode }> = ({
               justifyContent: 'center',
               alignItems: 'center',
               position: 'absolute',
-              background: '#ecececc2',
+              backgroundColor: `${backgroundColor || '#ecececc2'}`,
               top: 0,
               left: 0,
               width: '100%',
               height: '100%',
             }}
           >
-            {spinner || 'loading...'}
+            {spinner || <Spinner animation="border" />}
           </div>
         )}
       </div>
