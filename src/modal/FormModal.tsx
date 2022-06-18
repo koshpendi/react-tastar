@@ -7,6 +7,7 @@ import {
   Button,
   Spinner,
 } from 'react-bootstrap';
+import styled from 'styled-components';
 
 let form_id = '';
 
@@ -21,14 +22,24 @@ type Props = {
 
 type SubmitBtnProps = Pick<Props, 'submitTitle' | 'isLoading'>;
 
+const StyledBtn = styled(Button)<Pick<SubmitBtnProps, 'isLoading'>>`
+  flex-grow: ${({ isLoading }) => (isLoading ? 0.03 : 0)};
+  transition: flex-grow 0.1s ease-in-out;
+`;
+
 const SubmitBtn: FC<SubmitBtnProps> = ({ isLoading, submitTitle }) => {
   return (
-    <Button form={form_id} type="submit" disabled={isLoading}>
-      <div>
-        {isLoading && <Spinner size="sm" animation="border" className="me-2" />}
+    <StyledBtn
+      form={form_id}
+      type="submit"
+      disabled={isLoading}
+      isLoading={isLoading}
+    >
+      <div className="d-flex align-items-center justify-content-between">
         {submitTitle}
+        {isLoading && <Spinner size="sm" animation="border" />}
       </div>
-    </Button>
+    </StyledBtn>
   );
 };
 
@@ -67,5 +78,5 @@ const _Modal: FC<Props & ModalProps> = ({
 };
 
 export const FormModal = Object.assign(_Modal, {
-  Form: Form,
+  Form,
 });
