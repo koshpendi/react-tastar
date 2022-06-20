@@ -1,4 +1,4 @@
 export * from './use-mutation';
 export * from './use-query';
-export * from './Spinner';
-export * from './modal/FormModal'
+export * from './components/AbsoulteSpinner';
+export * from './components/FormModal'

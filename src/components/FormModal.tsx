@@ -1,46 +1,17 @@
 import React, { useEffect } from 'react';
 import { FC } from 'react';
-import {
-  Modal,
-  ModalProps,
-  ModalHeaderProps,
-  Button,
-  Spinner,
-} from 'react-bootstrap';
-import styled from 'styled-components';
+import { Modal, ModalProps, ModalHeaderProps, Button } from 'react-bootstrap';
+import { LoadingButton } from './LoadingButton';
 
 let form_id = '';
 
 type Props = {
   title: string;
   submitTitle: string;
-  formId?: string;
-  isLoading?: boolean;
+  formId: string;
+  isLoading: boolean;
   headerProps?: ModalHeaderProps;
   closeTitle?: string;
-};
-
-type SubmitBtnProps = Pick<Props, 'submitTitle' | 'isLoading'>;
-
-const StyledBtn = styled(Button)<Pick<SubmitBtnProps, 'isLoading'>>`
-  flex-grow: ${({ isLoading }) => (isLoading ? 0.03 : 0)};
-  transition: flex-grow 0.1s ease-in-out;
-`;
-
-const SubmitBtn: FC<SubmitBtnProps> = ({ isLoading, submitTitle }) => {
-  return (
-    <StyledBtn
-      form={form_id}
-      type="submit"
-      disabled={isLoading}
-      isLoading={isLoading}
-    >
-      <div className="d-flex align-items-center justify-content-between">
-        {submitTitle}
-        {isLoading && <Spinner size="sm" animation="border" />}
-      </div>
-    </StyledBtn>
-  );
 };
 
 export const Form: FC = ({ children }) => {
@@ -71,7 +42,13 @@ const _Modal: FC<Props & ModalProps> = ({
         <Button type="button" variant="outline-primary" onClick={modalProps.onHide}>
           {closeTitle || 'Cancel'}
         </Button>
-        <SubmitBtn isLoading={isLoading} submitTitle={submitTitle} />
+        <LoadingButton
+          form={form_id}
+          type="submit"
+          isLoading={isLoading}
+        >
+          {submitTitle}
+        </LoadingButton>
       </Modal.Footer>
     </Modal>
   );
